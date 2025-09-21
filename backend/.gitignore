@@ -1,0 +1,5 @@
+# Ignore the node modules folder
+node_modules
+
+# Ignore environment variables file
+.envcd
