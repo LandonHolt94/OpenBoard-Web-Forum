@@ -1,0 +1,199 @@
+# OpenBoard Web Forum
+
+A simple forum web application built with Node.js, Express, MySQL, and JWT authentication.
+
+---
+
+## Table of Contents
+
+1. [Project Setup](#project-setup)  
+2. [Packages & Dependencies](#packages--dependencies)  
+3. [Environment Variables](#environment-variables)  
+4. [Database Setup](#database-setup)  
+5. [Available Routes](#available-routes)  
+6. [Testing the API](#testing-the-api)  
+
+---
+
+## Project Setup
+
+1. Clone the repository:
+
+```bash 
+git clone https://github.com/LandonHolt94/OpenBoard-Web-Forum.git
+cd OpenBoard-Web-Forum/backend
+```
+2. Install dependencies:
+
+    npm install
+
+
+3. Start the server:
+
+    node src/server.js
+
+
+The server will run on http://localhost:3000 (or the port specified in .env).
+
+[Packages & Dependencies]:
+
+This project uses:
+
+express – Web framework for Node.js
+
+mysql2 – MySQL client with promise support
+
+dotenv – Loads environment variables from .env
+
+bcrypt – Password hashing
+
+jsonwebtoken (JWT) – Authentication tokens
+
+nodemon (optional, dev dependency) – Auto-restarts server during development
+
+[Install all dependencies]:
+
+  npm install express mysql2 dotenv bcrypt jsonwebtoken
+
+
+Optional dev dependency:
+
+  npm install --save-dev nodemon
+
+Environment Variables
+
+[Create a .env file in the backend folder]:
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=password
+DB_NAME=openboard_db
+JWT_SECRET=your_super_secret_key
+PORT=3000
+
+
+Make sure to replace DB_PASSWORD and JWT_SECRET with your own secure values.
+
+[Database Setup]
+
+1. Start your MySQL server.
+
+2. Create the database and tables:
+
+    CREATE DATABASE openboard_db;
+
+      USE openboard_db - This is the one Damian created (Found below this text). You can copy and paste it to mysql, run it to create the database.
+
+-- Users table
+CREATE TABLE users (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    PasswordHash VARCHAR(255) NOT NULL,
+    Role VARCHAR(50) NOT NULL DEFAULT 'user',
+    AccountCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Posts table
+CREATE TABLE posts (
+    PostID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT NOT NULL,
+    Title VARCHAR(255) NOT NULL,
+    Body TEXT NOT NULL,
+    HidePost BOOLEAN NOT NULL DEFAULT FALSE,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (UserID) REFERENCES users(UserID)
+);
+
+-- Comments table
+CREATE TABLE comments (
+    CommentID INT AUTO_INCREMENT PRIMARY KEY,
+    PostID INT NOT NULL,
+    UserID INT NOT NULL,
+    Body TEXT NOT NULL,
+    HideComment BOOLEAN NOT NULL DEFAULT FALSE,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (PostID) REFERENCES posts(PostID),
+    FOREIGN KEY (UserID) REFERENCES users(UserID)
+);
+
+-- Likes table
+CREATE TABLE likes (
+    LikeID INT AUTO_INCREMENT PRIMARY KEY,
+    PostID INT NOT NULL,
+    UserID INT NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (PostID) REFERENCES posts(PostID),
+    FOREIGN KEY (UserID) REFERENCES users(UserID),
+    UNIQUE (PostID, UserID)
+);
+
+-- SurveyResponses table
+CREATE TABLE SurveyResponses (
+    ResponseID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT NOT NULL,
+    ResponseData TEXT NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+Available Routes
+Public Routes
+
+GET / – Test route, returns “Hello from the Open Web Board!”
+
+POST /register – Register a new user
+
+POST /login – Login and receive a JWT
+
+Protected Routes (future)
+
+POST /posts – Create a new post (requires JWT)
+
+POST /comments – Comment on a post (requires JWT)
+
+Testing the API
+
+Use Postman or Insomnia to test endpoints:
+
+Register a user
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+  "username": "exampleuser",
+  "email": "example@email.com",
+  "password": "password123"
+}
+
+Login a user
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "example@email.com",
+  "password": "password123"
+}
+
+
+Copy the returned token for any authenticated requests.
+
+[Tips for Teammates]
+
+Always use unique usernames and emails when testing /register to avoid conflicts.
+
+For authenticated routes, include the JWT in the Authorization header:
+
+Authorization: Bearer <YOUR_JWT_TOKEN>
+
+[Troubleshoot]
+
+If the server doesn't start, check:
+
+.env file exists in the backend folder
+
+MySQL server is running
+
+Database name matches DB_NAME in .env
+
+Use nodemon src/server.js for automatic server reload during development.
