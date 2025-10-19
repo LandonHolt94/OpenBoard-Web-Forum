@@ -1,18 +1,15 @@
-// In db.js
-
-require('dotenv').config(); // This loads the variables from .env
 const mysql = require('mysql2');
 
-// Create a connection pool
+// Create a connection pool with your real credentials
 const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    host: 'localhost',
+    user: 'root',         // your MySQL username
+    password: 'password', // your MySQL password
+    database: 'openboard_db', // your actual database name
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
 });
 
-// Export the pool so you can use it in other files
+// Export the pool
 module.exports = pool.promise();
