@@ -1,5 +1,18 @@
 // In app.js or server.js
 
+// src/server.js added for our express serve, once ran it will show local host in terminal
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// A simple test route to make sure everything is working
+app.get('/', (req, res) => {
+    res.send('Hello from the Open Web Board!');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
 // Import the database connection
 const db = require('./db');
 
@@ -19,4 +32,8 @@ async function registerUser(username, email, password) {
 }
 
 // Call the function to test itcb
-registerUser('testuser', 'test@example.com', 'fakepassword123');
+//registerUser('testuser', 'test@example.com', 'fakepassword123');
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
