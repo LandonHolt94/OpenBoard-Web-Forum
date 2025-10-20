@@ -223,6 +223,9 @@ Example image:
 If all is successful you will see the follorw in the 'body' window:
 <img width="1918" height="1137" alt="testsucess" src="https://github.com/user-attachments/assets/7d4cf5f8-85ad-47b3-87e9-59a95fd0008a" />
 
+Then you can go to MYSQL - Workbench to confrim successful new registration:
+<img width="1617" height="1081" alt="MySQL_Test_success" src="https://github.com/user-attachments/assets/f16120c0-c0e7-45b2-9f72-4db2df2891da" />
+
 
 Copy the returned token for any authenticated requests.
 
