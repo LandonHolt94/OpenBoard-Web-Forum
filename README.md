@@ -220,6 +220,9 @@ Content-Type: application/json
 Example image:
 <img width="1916" height="1140" alt="Postman Example" src="https://github.com/user-attachments/assets/4bd95846-ef37-416e-b2e3-ff8fd748d5c7" />
 
+If all is successful you will see the follorw in the 'body' window:
+<img width="1918" height="1137" alt="testsucess" src="https://github.com/user-attachments/assets/7d4cf5f8-85ad-47b3-87e9-59a95fd0008a" />
+
 
 Copy the returned token for any authenticated requests.
 
