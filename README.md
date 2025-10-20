@@ -14,7 +14,7 @@ A simple forum web application built with Node.js, Express, MySQL, and JWT authe
 6. [Testing the API](#testing-the-api)  
 
 ---
-**PLEASE DOWNLOAD THE FOLLOWING BEFORE PROCEEDING WITH PROJECT SETUP IF YOU HAVE ALREADY**
+**PLEASE DOWNLOAD THE FOLLOWING BEFORE PROCEEDING WITH PROJECT SETUP IF YOU HAVE NOT DONE SO ALREADY**
 
 [MySQL Server & MySQL Workbench]
 
