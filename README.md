@@ -25,12 +25,12 @@ cd OpenBoard-Web-Forum/backend
 ```
 2. Install dependencies:
 
-    npm install
+        npm install
 
 
 3. Start the server:
 
-    node src/server.js
+        node src/server.js
 
 
 The server will run on http://localhost:3000 (or the port specified in .env).
@@ -155,15 +155,28 @@ Public Routes
 
 GET / – Test route, returns “Hello from the Open Web Board!”
 
-POST /register – Register a new user
+To so this test to ensure API Endpoints can be accessed to do Change your directory to the src file.
+the path is:
 
-POST /login – Login and receive a JWT
+CD backend
+CD src
 
-Protected Routes (future)
+Then type:
 
-POST /posts – Create a new post (requires JWT)
+node server.js
 
-POST /comments – Comment on a post (requires JWT)
+Then go to (
+
+
+POST /register – Register a new user (Using POSTMAN further inforation is in Testin the API)
+
+POST /login – Login and receive a JWT (Using POSTMAN further inforation is in Testin the API)
+
+Protected Routes (future/Not currently implemented)
+
+POST /posts – Create a new post (requires JWT) (Using POSTMAN further inforation is in Testin the API)
+
+POST /comments – Comment on a post (requires JWT) (Using POSTMAN further inforation is in Testin the API)
 
 ## Testing the API
 [Testing the API]:
