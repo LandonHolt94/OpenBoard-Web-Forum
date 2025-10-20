@@ -139,6 +139,15 @@ CREATE TABLE SurveyResponses (
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+Example image using Workbench:
+<img width="1919" height="1138" alt="Screenshot 2025-10-19 172214" src="https://github.com/user-attachments/assets/d4e26306-f7a0-4b35-b6d5-2750f13057a7" />
+
+Once you have created your database, To test it work properly you can run:
+SHOW DATABASES;
+After you will see the openboard_db listed within Database! 
+
+<img width="1919" height="1136" alt="Screenshot 2025-10-19 172539" src="https://github.com/user-attachments/assets/c1bccb78-dd74-4530-88d5-09a9f532eaa1" />
+
 ## Available Routes
 [Available Routes]:
 
