@@ -14,6 +14,46 @@ A simple forum web application built with Node.js, Express, MySQL, and JWT authe
 6. [Testing the API](#testing-the-api)  
 
 ---
+**PLEASE DOWNLOAD THE FOLLOWING BEFORE PROCEEDING WITH PROJECT SETUP IF YOU HAVE ALREADY**
+
+[MySQL Server & MySQL Workbench]
+
+Used to manage and query your project’s database.
+
+        Download: https://dev.mysql.com/downloads/workbench/
+
+Version: MySQL 8.0 or higher
+
+Setup Tip: During installation, set your root password and remember it — you’ll use it in your .env file.
+
+[Node.js]
+
+Used to run the backend (Express server) locally.
+
+Download: https://nodejs.org/en/download
+
+Version: Node 18+ recommended
+
+Verify installation:
+
+        node -v
+        npm -v
+
+[Postman]
+
+Used for testing API endpoints (like /register or /login).
+
+        Download: https://www.postman.com/downloads/
+
+How to Use:
+
+Open Postman
+
+Create a new POST request to http://localhost:3000/register
+
+Set body type to raw → JSON and test your routes easily.
+
+This is further explained below but are welcome to use your own perferred testing tool if you are familiar with such aalready
 
 ## Project Setup
 
