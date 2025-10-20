@@ -166,7 +166,7 @@ Then type:
         node server.js
 
 Then go to (http://localhost:3000/)
-YOu should see:
+You should see:
 <img width="1920" height="1200" alt="Screenshot (12)" src="https://github.com/user-attachments/assets/d80b7fb7-0dd8-4287-9dfb-4085d1866c05" />
 
 
