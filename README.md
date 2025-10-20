@@ -53,24 +53,24 @@ nodemon (optional, dev dependency) – Auto-restarts server during development
 
 [Install all dependencies]:
 
-  npm install express mysql2 dotenv bcrypt jsonwebtoken
+          npm install express mysql2 dotenv bcrypt jsonwebtoken
 
 
 Optional dev dependency:
 
-  npm install --save-dev nodemon
+          npm install --save-dev nodemon
   
 ## Environment Variables
 Environment Variables
 
 [Create a .env file in the backend folder]:
 
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=password
-DB_NAME=openboard_db
-JWT_SECRET=your_super_secret_key
-PORT=3000
+        DB_HOST=localhost
+        DB_USER=root
+        DB_PASSWORD=password
+        DB_NAME=openboard_db
+        JWT_SECRET=your_super_secret_key
+        PORT=3000
 
 
 Make sure to replace DB_PASSWORD and JWT_SECRET with your own secure values.
@@ -82,68 +82,68 @@ Make sure to replace DB_PASSWORD and JWT_SECRET with your own secure values.
 
 2. Create the database and tables:
 
-    CREATE DATABASE openboard_db;
+            CREATE DATABASE openboard_db;
 
       USE openboard_db - This is the one Damian created (Found below this text). You can copy and paste it to mysql, run it to create the database.
 
--- Users table
-CREATE TABLE users (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Username VARCHAR(50) NOT NULL UNIQUE,
-    Email VARCHAR(255) NOT NULL UNIQUE,
-    PasswordHash VARCHAR(255) NOT NULL,
-    Role VARCHAR(50) NOT NULL DEFAULT 'user',
-    AccountCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Posts table
-CREATE TABLE posts (
-    PostID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT NOT NULL,
-    Title VARCHAR(255) NOT NULL,
-    Body TEXT NOT NULL,
-    HidePost BOOLEAN NOT NULL DEFAULT FALSE,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (UserID) REFERENCES users(UserID)
-);
-
--- Comments table
-CREATE TABLE comments (
-    CommentID INT AUTO_INCREMENT PRIMARY KEY,
-    PostID INT NOT NULL,
-    UserID INT NOT NULL,
-    Body TEXT NOT NULL,
-    HideComment BOOLEAN NOT NULL DEFAULT FALSE,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (PostID) REFERENCES posts(PostID),
-    FOREIGN KEY (UserID) REFERENCES users(UserID)
-);
-
--- Likes table
-CREATE TABLE likes (
-    LikeID INT AUTO_INCREMENT PRIMARY KEY,
-    PostID INT NOT NULL,
-    UserID INT NOT NULL,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (PostID) REFERENCES posts(PostID),
-    FOREIGN KEY (UserID) REFERENCES users(UserID),
-    UNIQUE (PostID, UserID)
-);
-
--- SurveyResponses table
-CREATE TABLE SurveyResponses (
-    ResponseID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT NOT NULL,
-    ResponseData TEXT NOT NULL,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+        -- Users table
+        CREATE TABLE users (
+            UserID INT AUTO_INCREMENT PRIMARY KEY,
+            Username VARCHAR(50) NOT NULL UNIQUE,
+            Email VARCHAR(255) NOT NULL UNIQUE,
+            PasswordHash VARCHAR(255) NOT NULL,
+            Role VARCHAR(50) NOT NULL DEFAULT 'user',
+            AccountCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        
+        -- Posts table
+        CREATE TABLE posts (
+            PostID INT AUTO_INCREMENT PRIMARY KEY,
+            UserID INT NOT NULL,
+            Title VARCHAR(255) NOT NULL,
+            Body TEXT NOT NULL,
+            HidePost BOOLEAN NOT NULL DEFAULT FALSE,
+            CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            FOREIGN KEY (UserID) REFERENCES users(UserID)
+        );
+        
+        -- Comments table
+        CREATE TABLE comments (
+            CommentID INT AUTO_INCREMENT PRIMARY KEY,
+            PostID INT NOT NULL,
+            UserID INT NOT NULL,
+            Body TEXT NOT NULL,
+            HideComment BOOLEAN NOT NULL DEFAULT FALSE,
+            CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (PostID) REFERENCES posts(PostID),
+            FOREIGN KEY (UserID) REFERENCES users(UserID)
+        );
+        
+        -- Likes table
+        CREATE TABLE likes (
+            LikeID INT AUTO_INCREMENT PRIMARY KEY,
+            PostID INT NOT NULL,
+            UserID INT NOT NULL,
+            CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (PostID) REFERENCES posts(PostID),
+            FOREIGN KEY (UserID) REFERENCES users(UserID),
+            UNIQUE (PostID, UserID)
+        );
+        
+        -- SurveyResponses table
+        CREATE TABLE SurveyResponses (
+            ResponseID INT AUTO_INCREMENT PRIMARY KEY,
+            UserID INT NOT NULL,
+            ResponseData TEXT NOT NULL,
+            CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
 
 Example image using Workbench:
 <img width="1919" height="1138" alt="Screenshot 2025-10-19 172214" src="https://github.com/user-attachments/assets/d4e26306-f7a0-4b35-b6d5-2750f13057a7" />
 
 Once you have created your database, To test it work properly you can run:
-SHOW DATABASES;
+        SHOW DATABASES;
 After you will see the openboard_db listed within Database! 
 
 <img width="1919" height="1136" alt="Screenshot 2025-10-19 172539" src="https://github.com/user-attachments/assets/c1bccb78-dd74-4530-88d5-09a9f532eaa1" />
@@ -158,14 +158,16 @@ GET / – Test route, returns “Hello from the Open Web Board!”
 To so this test to ensure API Endpoints can be accessed to do Change your directory to the src file.
 the path is:
 
-CD backend
-CD src
+        CD backend
+        CD src
 
 Then type:
 
-node server.js
+        node server.js
 
-Then go to (
+Then go to (http://localhost:3000/)
+YOu should see:
+<img width="1920" height="1200" alt="Screenshot (11)" src="https://github.com/user-attachments/assets/4133ce7d-6231-4847-bb2c-83257c2d4d20" />
 
 
 POST /register – Register a new user (Using POSTMAN further inforation is in Testin the API)
