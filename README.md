@@ -59,7 +59,8 @@ nodemon (optional, dev dependency) – Auto-restarts server during development
 Optional dev dependency:
 
   npm install --save-dev nodemon
-
+  
+## Environment Variables
 Environment Variables
 
 [Create a .env file in the backend folder]:
@@ -74,6 +75,7 @@ PORT=3000
 
 Make sure to replace DB_PASSWORD and JWT_SECRET with your own secure values.
 
+## Database Setup
 [Database Setup]
 
 1. Start your MySQL server.
@@ -137,7 +139,9 @@ CREATE TABLE SurveyResponses (
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-Available Routes
+## Available Routes
+[Available Routes]:
+
 Public Routes
 
 GET / – Test route, returns “Hello from the Open Web Board!”
@@ -152,13 +156,21 @@ POST /posts – Create a new post (requires JWT)
 
 POST /comments – Comment on a post (requires JWT)
 
-Testing the API
+## Testing the API
+[Testing the API]:
 
 Use Postman or Insomnia to test endpoints:
+(I Used Postman) - Once isntalled:
 
 Register a user
+Set to POST/ ADD localhost:
 POST http://localhost:3000/register
+
+Change Content-Type:
 Content-Type: application/json
+
+Select Body and make sure RAW is checked.
+Within the text window add:
 
 {
   "username": "exampleuser",
@@ -180,14 +192,14 @@ Copy the returned token for any authenticated requests.
 
 [Tips for Teammates]
 
-Always use unique usernames and emails when testing /register to avoid conflicts.
+-- Always use unique usernames and emails when testing /register to avoid conflicts.
 
-For authenticated routes, include the JWT in the Authorization header:
+-- For authenticated routes, include the JWT in the Authorization header:
 
-Authorization: Bearer <YOUR_JWT_TOKEN>
+--Authorization: Bearer <YOUR_JWT_TOKEN>
 
 [Troubleshoot]
-
+!!! Issues I Encountered !!!
 If the server doesn't start, check:
 
 .env file exists in the backend folder
