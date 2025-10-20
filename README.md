@@ -167,7 +167,8 @@ Then type:
 
 Then go to (http://localhost:3000/)
 YOu should see:
-<img width="1920" height="1200" alt="Screenshot (11)" src="https://github.com/user-attachments/assets/4133ce7d-6231-4847-bb2c-83257c2d4d20" />
+<img width="1920" height="1200" alt="Screenshot (12)" src="https://github.com/user-attachments/assets/d80b7fb7-0dd8-4287-9dfb-4085d1866c05" />
+
 
 
 POST /register – Register a new user (Using POSTMAN further inforation is in Testin the API)
