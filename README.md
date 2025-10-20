@@ -172,13 +172,18 @@ Content-Type: application/json
 Select Body and make sure RAW is checked.
 Within the text window add:
 
+Register a user:
 {
   "username": "exampleuser",
   "email": "example@email.com",
   "password": "password123"
 }
 
-Login a user
+You can repeat the steps above in a new tab and test Login a user.
+Select Body and make sure RAW is checked.
+Within the text window add:
+
+Login a user:
 POST http://localhost:3000/login
 Content-Type: application/json
 
@@ -186,6 +191,9 @@ Content-Type: application/json
   "email": "example@email.com",
   "password": "password123"
 }
+
+Example image:
+<img width="1916" height="1140" alt="Postman Example" src="https://github.com/user-attachments/assets/4bd95846-ef37-416e-b2e3-ff8fd748d5c7" />
 
 
 Copy the returned token for any authenticated requests.
