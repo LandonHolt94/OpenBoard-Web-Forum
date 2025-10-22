@@ -1,4 +1,4 @@
-# OpenBoard Web Forum
+v# OpenBoard Web Forum
 
 A simple forum web application built with Node.js, Express, MySQL, and JWT authentication.
 
@@ -15,6 +15,10 @@ A simple forum web application built with Node.js, Express, MySQL, and JWT authe
 
 ---
 **PLEASE DOWNLOAD THE FOLLOWING BEFORE PROCEEDING WITH PROJECT SETUP IF YOU HAVE NOT DONE SO ALREADY**
+
+[Node.js]
+
+        https://nodejs.org/en/download
 
 [MySQL Server & MySQL Workbench]
 
