@@ -1,14 +1,19 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
+require('dotenv').config();
 
-// Create a connection pool with your real credentials
+console.log('DB connect → host:', process.env.DB_HOST, 'port:', process.env.DB_PORT, 'user:', process.env.DB_USER, 'db:', process.env.DB_NAME);
+
+
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',         // your MySQL username
-    password: 'password', // your MySQL password
-    database: 'openboard_db', // your actual database name
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 3306,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+  charset: 'utf8mb4'
 });
-// Export the pool
-module.exports = pool.promise();
+
+module.exports = pool;
