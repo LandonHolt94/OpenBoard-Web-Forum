@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 // --- Global Middleware ---
 app.use(express.json()); // Parse JSON bodies
+app.use(express.static('public'));
 
 // --- Import Routes ---
 // We tell Node to look for your route files

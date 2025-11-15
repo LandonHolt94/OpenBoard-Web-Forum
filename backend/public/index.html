@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenBoard Web Forum</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <nav>
+        <h1><a href="/">OpenBoard Web Forum</a></h1>
+        <div id="auth-links">
+            <a href="/login.html" class="nav-button">Login</a>
+            <a href="/register.html" class="nav-button register">Register</a>
+        </div>
+        <div id="user-info" style="display: none;">
+            <span id="username-display"></span>
+            <button id="logout-button" class="nav-button">Logout</button>
+        </div>
+    </nav>
+
+    <main>
+        <section id="create-post-section" class="card" style="display: none;">
+            <h2>Create a New Post</h2>
+            <form id="create-post-form">
+                <div class="form-group">
+                    <label for="post-title">Title</label>
+                    <input type="text" id="post-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="post-content">Content</label>
+                    <textarea id="post-content" rows="4" required></textarea>
+                </div>
+                <button type="submit">Create Post</button>
+                <p id="post-message" class="message"></p>
+            </form>
+        </section>
+
+        <h2>All Posts</h2>
+        <section id="posts-container">
+        </section>
+    </main>
+
+    <script src="/js/main.js" defer></script>
+</body>
+</html>

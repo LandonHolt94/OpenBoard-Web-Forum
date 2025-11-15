@@ -1,0 +1,173 @@
+/* public/css/style.css */
+
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-color: #007bff;
+    --light-bg: #f4f7f6;
+    --dark-text: #333;
+    --light-text: #fefefe;
+    --border-color: #ddd;
+    --card-bg: #ffffff;
+    --danger-color: #dc3545;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    margin: 0;
+    line-height: 1.6;
+}
+
+main {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* --- Navigation Bar --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--card-bg);
+    border-bottom: 2px solid var(--border-color);
+}
+
+    nav h1 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+        nav h1 a {
+            color: var(--dark-text);
+            text-decoration: none;
+        }
+
+    nav #auth-links,
+    nav #user-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    nav #username-display {
+        font-weight: 600;
+    }
+
+.nav-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .nav-button.register {
+        background-color: var(--primary-color);
+        color: var(--light-text);
+    }
+
+#logout-button {
+    background: none;
+    border-color: var(--danger-color);
+    color: var(--danger-color);
+}
+
+/* --- Utility Card Style --- */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* --- Form Styles --- */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        box-sizing: border-box; /* Important for width: 100% */
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+    }
+
+button[type="submit"] {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    button[type="submit"]:hover {
+        opacity: 0.9;
+    }
+
+/* --- Posts List --- */
+.post-card {
+    position: relative;
+}
+
+    .post-card h3 {
+        margin-top: 0;
+    }
+
+.post-meta {
+    font-size: 0.9rem;
+    color: #666;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+    .delete-button:hover {
+        opacity: 0.8;
+    }
+
+/* --- Messages --- */
+.message {
+    font-weight: 600;
+    margin-top: 1rem;
+}
