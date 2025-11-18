@@ -3,6 +3,7 @@
 /* --- Global Styles & Variables --- */
 :root {
     --primary-color: #007bff;
+    --accent-color: #f07c2c; /* Our new orange */
     --light-bg: #f4f7f6;
     --dark-text: #333;
     --light-text: #fefefe;
@@ -17,12 +18,17 @@ body {
     color: var(--dark-text);
     margin: 0;
     line-height: 1.6;
+    /* --- Sticky Footer Fix --- */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 main {
     max-width: 900px;
     margin: 20px auto;
     padding: 0 20px;
+    flex-grow: 1; /* This pushes the footer down */
 }
 
 a {
@@ -39,9 +45,15 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: var(--card-bg);
-    border-bottom: 2px solid var(--border-color);
+    padding: 20px 40px;
+    color: #ffffff; /* White text */
+    /* --- BACKGROUND IMAGE --- */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../images/header.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* 3. CORRECTED (WHITE) GLOW for header text */
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
 }
 
     nav h1 {
@@ -50,7 +62,7 @@ nav {
     }
 
         nav h1 a {
-            color: var(--dark-text);
+            color: #ffffff; /* White */
             text-decoration: none;
         }
 
@@ -63,27 +75,52 @@ nav {
 
     nav #username-display {
         font-weight: 600;
+        font-weight: bold;
     }
 
+/* --- Navigation Buttons (Login/Register) --- */
 .nav-button {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--primary-color);
+    display: inline-block;
+    padding: 8px 16px;
+    margin-left: 10px;
+    background-color: var(--accent-color); /* Orange */
+    color: #ffffff;
+    text-decoration: none;
     border-radius: 5px;
-    color: var(--primary-color);
-    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none;
     cursor: pointer;
+    font-weight: bold; /* Added bold text */
 }
 
-    .nav-button.register {
-        background-color: var(--primary-color);
-        color: var(--light-text);
+    .nav-button:hover {
+        background-color: #f1c40f; /* Yellow */
+        color: #000000; /* Black text */
     }
 
+/* --- Logout Button --- */
 #logout-button {
-    background: none;
-    border-color: var(--danger-color);
-    color: var(--danger-color);
+    /* Base styles to match other buttons */
+    display: inline-block;
+    padding: 8px 16px;
+    margin-left: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold; /* Added bold text */
+    /* Unique red outline style */
+    background-color: transparent;
+    border: 1px solid #DC2626;
+    color: #DC2626;
+    transition: all 0.2s ease-in-out;
 }
+
+    #logout-button:hover {
+        background-color: #DC2626; /* Fill with red */
+        color: #FFFFFF; /* White text */
+        border-color: #DC2626;
+        cursor: pointer;
+    }
+
 
 /* --- Utility Card Style --- */
 .card {
@@ -110,11 +147,12 @@ nav {
     .form-group textarea {
         width: 100%;
         padding: 0.75rem;
-        box-sizing: border-box; /* Important for width: 100% */
+        box-sizing: border-box;
         border: 1px solid var(--border-color);
         border-radius: 5px;
     }
 
+/* This is the default blue submit button (e.g., for login form) */
 button[type="submit"] {
     background-color: var(--primary-color);
     color: var(--light-text);
@@ -129,6 +167,22 @@ button[type="submit"] {
     button[type="submit"]:hover {
         opacity: 0.9;
     }
+
+/* --- Create Post Button (Overrides the default button) --- */
+#create-post-form button[type="submit"] {
+    background-color: var(--accent-color); /* Orange */
+    border-color: var(--accent-color);
+    color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    font-weight: bold; /* Added bold text */
+}
+
+    #create-post-form button[type="submit"]:hover {
+        background-color: #f1c40f; /* Yellow */
+        border-color: #f1c40f;
+        color: #000000; /* Black text */
+    }
+
 
 /* --- Posts List --- */
 .post-card {
@@ -200,31 +254,21 @@ button[type="submit"] {
         gap: 1rem;
     }
 
-/* --- Custom Button Color --- */
-#create-post-form button[type="submit"] {
-    background-color: #FFA500; /* This is a standard orange */
-    border-color: #FFA500;
-    color: #ffffff; /* Sets the text color to white for better contrast */
+
+footer {
+    color: #f4f7f6; 
+    text-align: center;
+    padding: 20px 40px;
+    margin-top: 40px;
+    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/footer.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-    /* Optional: Add a hover effect */
-    #create-post-form button[type="submit"]:hover {
-        background-color: #E69500; /* A slightly darker orange for hover */
-        border-color: #E69500;
-    }
-
-
-#logout-button {
-    background-color: transparent; /* Or #FFFFFF if you prefer */
-    border: 1px solid #DC2626; /* A nice, modern red */
-    color: #DC2626;
-    transition: all 0.2s ease-in-out; /* This makes the fill effect smooth */
-}
-
-    /* This is the hover state: filled in */
-    #logout-button:hover {
-        background-color: #DC2626; /* The same red */
-        color: #FFFFFF; /* White text for contrast */
-        border-color: #DC2626; /* Match the background */
-        cursor: pointer; /* Show a hand cursor on hover */
+    footer p {
+        margin: 0;
+        font-size: 0.9rem;
+        
     }
