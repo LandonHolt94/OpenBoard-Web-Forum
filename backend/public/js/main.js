@@ -17,14 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     let loggedInUser = null; // We'll store user data here
 
+    // Survey Modal Elements
+    const surveyModal = document.querySelector('#survey-modal');
+    const surveyForm = document.querySelector('#survey-form');
+    const skipSurveyBtn = document.querySelector('#skip-survey-btn');
+
+
+    // --- 1.5. CHECK FOR NEW USER SURVEY ---
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('new_user') === 'true') {
+        if (surveyModal) {
+            surveyModal.style.display = 'flex';
+        }
+        window.history.replaceState(null, '', '/');
+    }
+
+
     // --- 2. CHECK LOGIN STATE & UPDATE UI ---
     async function checkLoginState() {
         if (token) {
-            // User *might* be logged in. Let's verify token with the server.
             try {
-                //
-                //  THIS IS THE CORRECTED LINE 
-                //
                 const response = await fetch('/api/auth/me', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -33,16 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('Token is invalid');
                 }
 
-                loggedInUser = await response.json(); // Save user data (e.g., { userId: 1, ... })
+                loggedInUser = await response.json();
 
                 // --- Update UI for LOGGED-IN user ---
                 authLinks.style.display = 'none';
                 userInfo.style.display = 'flex';
+
+                //
+                // --- THIS IS THE FIX ---
+                // Changed back to 'loggedInUser.Username' (UPPERCASE)
+                //
                 usernameDisplay.textContent = `Welcome, ${loggedInUser.username}`;
-                createPostSection.style.display = 'block'; // Show the "Create Post" form
+                createPostSection.style.display = 'block';
 
             } catch (error) {
-                // Token is bad or expired
                 console.warn('Invalid token:', error);
                 localStorage.removeItem('token');
                 // --- Update UI for LOGGED-OUT user ---
@@ -58,19 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // --- 3. ALWAYS FETCH POSTS (after checking login) ---
-        // We run this *after* checking login so we know who the user is
         await fetchAndDisplayPosts();
     }
 
     // --- 4. FUNCTION TO FETCH & DISPLAY POSTS ---
     async function fetchAndDisplayPosts() {
         try {
-            // This URL is already correct
             const response = await fetch('/api/posts');
             if (!response.ok) throw new Error('Failed to fetch posts');
 
             const posts = await response.json();
-            postsContainer.innerHTML = ''; // Clear loading/old posts
+            postsContainer.innerHTML = '';
 
             if (posts.length === 0) {
                 postsContainer.innerHTML = '<p>No posts yet. Be the first!</p>';
@@ -83,16 +97,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const postDate = new Date(post.CreatedAt).toLocaleString();
 
+                //
+                // --- FIX: Use UPPERCASE for post properties ---
+                //
                 postElement.innerHTML = `
                     <h3>${post.Title}</h3>
-                    <p>${post.Content}</p>
+                    <p>${post.Body}</p>
                     <div class="post-meta">
                         <span>Posted by: <strong>${post.Username}</strong></span>
                         <span>On: ${postDate}</span>
                     </div>
                 `;
 
-                // --- Add Delete Button ONLY if user is logged in AND is the author ---
+                //
+                // --- FIX: Use UPPERCASE for post properties ---
+                //
                 if (loggedInUser && post.UserID === loggedInUser.userId) {
                     const deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Delete';
@@ -115,14 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!confirm('Are you sure you want to delete this post?')) return;
 
         try {
-            // This URL is already correct
             const response = await fetch(`/api/posts/${postId}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
             if (response.ok) {
-                postElement.remove(); // Remove post from the page instantly
+                postElement.remove();
             } else {
                 const result = await response.json();
                 alert(`Error: ${result.error || 'Failed to delete post.'}`);
@@ -136,26 +154,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Logout Button
     logoutButton.addEventListener('click', () => {
-        localStorage.removeItem('token'); // Clear the token
-        window.location.reload(); // Refresh the page
+        localStorage.removeItem('token');
+        window.location.reload();
     });
 
     // Create Post Form
     createPostForm.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Stop form from reloading page
+        e.preventDefault();
 
         const title = document.querySelector('#post-title').value;
         const content = document.querySelector('#post-content').value;
 
         try {
-            // This URL is already correct
             const response = await fetch('/api/posts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ title, content })
+                body: JSON.stringify({ title, body: content })
             });
 
             const result = await response.json();
@@ -163,8 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 postMessage.textContent = 'Post created!';
                 postMessage.style.color = 'green';
-                createPostForm.reset(); // Clear the form
-                await fetchAndDisplayPosts(); // Refresh posts list
+                createPostForm.reset();
+                await fetchAndDisplayPosts();
             } else {
                 postMessage.textContent = `Error: ${result.error}`;
                 postMessage.style.color = 'red';
@@ -174,6 +191,58 @@ document.addEventListener('DOMContentLoaded', () => {
             postMessage.style.color = 'red';
         }
     });
+
+
+    // --- SURVEY MODAL LISTENERS (This part is correct) ---
+    //
+    if (surveyForm) {
+        surveyForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(surveyForm);
+            const referral = formData.get('referral');
+
+            if (!token) {
+                console.error("No token found, can't submit survey.");
+                surveyModal.style.display = 'none';
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/survey', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ referral: referral })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to submit survey');
+                }
+                console.log('Survey submitted successfully!');
+                //
+                // --- THIS IS THE SYNTAX FIX ---
+                // Changed the '.' to a '{'
+                //
+            } catch (err) {
+                console.error('Error submitting survey:', err);
+            }
+
+            surveyModal.style.display = 'none';
+        });
+    }
+
+    if (skipSurveyBtn) {
+        skipSurveyBtn.addEventListener('click', () => {
+            console.log('Survey skipped.');
+            surveyModal.style.display = 'none'; // Hide modal
+        });
+    }
+    //
+    // --- END SURVEY LISTENERS ---
+    //
 
     // --- 7. INITIALIZE THE APP ---
     checkLoginState();

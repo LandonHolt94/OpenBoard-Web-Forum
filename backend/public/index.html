@@ -42,6 +42,30 @@
         </section>
     </main>
 
+    <div id="survey-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal-content">
+            <h2>Welcome!</h2>
+            <p>Please take a moment to answer a quick survey.</p>
+
+            <form id="survey-form">
+                <label for="survey-referral">How did you hear about us?</label>
+                <select id="survey-referral" name="referral">
+                    <option value="" disabled selected>-- Please select an option --</option>
+                    <option value="google">Google / Search Engine</option>
+                    <option value="friend">From a friend</option>
+                    <option value="social_media">Social Media</option>
+                    <option value="professor">Professor / Class</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <button type="submit">Submit</button>
+                <button type="button" id="skip-survey-btn">Skip</button>
+            </form>
+        </div>
+    </div>
+
+
+    Once you save this in your `index.html` file and refresh the browser, that HTML error will be gone.
     <script src="/js/main.js" defer></script>
 </body>
 </html>

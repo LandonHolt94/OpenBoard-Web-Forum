@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Post - OpenBoard Web Forum</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <nav>
+        <h1><a href="/">OpenBoard Web Forum</a></h1>
+        <div id="auth-links">
+            <a href="/login.html" class="nav-button">Login</a>
+            <a href="/register.html" class="nav-button register">Register</a>
+        </div>
+        <div id="user-info" style="display: none;">
+            <span id="username-display"></span>
+            <button id="logout-button" class="nav-button">Logout</button>
+        </div>
+    </nav>
+
+    <main>
+        <section id="post-detail-container">
+        </section>
+
+        <section id="comments-container">
+            <h2>Comments</h2>
+        </section>
+    </main>
+
+    <script src="/js/post.js" defer></script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 require('dotenv').config(); // Load environment variables FIRST
 const express = require('express');
+const path = require('path');
 const db = require('./db'); // Your promise-based db.js
 
 // --- Create App ---
@@ -8,12 +9,13 @@ const PORT = process.env.PORT || 3000;
 
 // --- Global Middleware ---
 app.use(express.json()); // Parse JSON bodies
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // --- Import Routes ---
 // We tell Node to look for your route files
 const authRoutes = require('./routes/auth.routes');
 const postsRoutes = require('./routes/posts.routes');
+const surveyRoutes = require('./routes/survey.routes');
 
 // --- Mount Routes ---
 // All auth routes will be prefixed with /api/auth
@@ -22,6 +24,8 @@ app.use('/api/auth', authRoutes);
 
 // All post routes will be prefixed with /api/posts
 app.use('/api/posts', postsRoutes);
+
+app.use('/api/survey', surveyRoutes);
 
 // --- Test & Health Routes ---
 app.get('/api', (req, res) => {

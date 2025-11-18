@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Redirect to login page after a short delay
                     setTimeout(() => {
-                        window.location.href = '/login.html';
+                        window.location.href = '/login.html?new_user=true';
                     }, 2000);
 
                 } else {
