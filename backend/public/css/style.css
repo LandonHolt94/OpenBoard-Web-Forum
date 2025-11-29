@@ -1,4 +1,4 @@
-/* public/css/style.css */
+﻿/* public/css/style.css */
 
 /* --- Global Styles & Variables --- */
 :root {
@@ -48,7 +48,8 @@ nav {
     padding: 20px 40px;
     color: #ffffff; /* White text */
     /* --- BACKGROUND IMAGE --- */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../images/header.jpg);
+    /* ✅ FIX: Reduced overlay opacity to 0.05 for a much lighter banner */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), url(../images/header.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -256,12 +257,12 @@ button[type="submit"] {
 
 
 footer {
-    color: #f4f7f6; 
+    color: #f4f7f6;
     text-align: center;
     padding: 20px 40px;
     margin-top: 40px;
-    
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/footer.jpg);
+    /* ✅ FIX: Changed opacity from 0.7 to 0.05 to match the top banner */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), url(../images/footer.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -270,5 +271,5 @@ footer {
     footer p {
         margin: 0;
         font-size: 0.9rem;
-        
+
     }

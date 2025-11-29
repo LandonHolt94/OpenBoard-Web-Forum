@@ -1,4 +1,4 @@
-// public/js/main.js
+﻿// public/js/main.js
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. GET ALL OUR HTML ELEMENTS ---
@@ -51,10 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 authLinks.style.display = 'none';
                 userInfo.style.display = 'flex';
 
-                //
-                // --- THIS IS THE FIX ---
-                // Changed back to 'loggedInUser.Username' (UPPERCASE)
-                //
                 usernameDisplay.textContent = `Welcome, ${loggedInUser.username}`;
                 createPostSection.style.display = 'block';
 
@@ -97,9 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const postDate = new Date(post.CreatedAt).toLocaleString();
 
-                //
-                // --- FIX: Use UPPERCASE for post properties ---
-                //
                 postElement.innerHTML = `
                     <h3>${post.Title}</h3>
                     <p>${post.Body}</p>
@@ -109,10 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
 
-                //
-                // --- FIX: Use UPPERCASE for post properties ---
-                //
-                if (loggedInUser && post.UserID === loggedInUser.userId) {
+                // ------------------------------------------------------------------
+                // ✅ FINAL FIX: Changed loggedInUser.userId to loggedInUser.id
+                // (Assumes the property is 'id' on the user object)
+                // ------------------------------------------------------------------
+                if (loggedInUser && String(post.UserID) === String(loggedInUser.id)) {
                     const deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Delete';
                     deleteButton.className = 'delete-button';
